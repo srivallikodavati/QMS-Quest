@@ -89,6 +89,9 @@ public class CreateNCRecordPage extends TestBase{
 
 	@FindBy(id = "comboBox_V_SS_NC-V_PRS_DEFECT_CONDITION_PRS_DEFECT_1")
 	WebElement Defect;
+	
+	@FindBy(id="V_SS_NC-V_PRS_DEFECT_CONDITION_PRS_DEFECT_ID_1")
+	WebElement DefectID;
 
 	@FindBy(xpath = "//textarea[@id='textArea_V_SS_NC-V_PRS_DEFECT_CONDITION_PRS_STATE_OF_REQ_1']")
 	WebElement StmtOfReq;
@@ -150,11 +153,33 @@ public class CreateNCRecordPage extends TestBase{
 	@FindBy(id="fieldLabel_V_SS_NC-V_SS_NC_PART_CATALOG_NUMBER_1")
 	WebElement DesignGroup;
 	
+	@FindBy(id="V_SS_NC_REPORTED_BY_CODE_1")
+	WebElement ReportedBy;
 	
+	@FindBy(id="V_SS_NC_REPORT_DATE_1")
+	WebElement ReportDate;
 	
+	@FindBy(id="V_SS_NC_OCCURRENCE_DATE_1")
+	WebElement OccurrenceDate;
 	
+	@FindBy(xpath="//span[contains(text(),'Attachment (0)')]")
+	WebElement AttachmentPanel;
+	
+	@FindBy(xpath="//*[@id='elementContainer_V_SS_NC_COLUMN_HEADER_1']")
+	WebElement AttachmentColumn1;
+	
+	@FindBy(id="elementContainer_V_SS_NC_COLUMN_HEADER_2")
+	WebElement AttachmentColumn2;
 
+	@FindBy(id="elementContainer_V_SS_NC_COLUMN_HEADER_3")
+	WebElement AttachmentColumn3;
+	
+	@FindBy(id="elementContainer_V_SS_NC_COLUMN_HEADER_4")
+	WebElement AttachmentColumn4;
 
+	@FindBy(xpath="//span[text()='Add Attachment']")
+	WebElement AddAttachment;
+	
 	@FindBy(xpath = "//span[text()='Submit']")
 	WebElement Submit;
 
@@ -268,6 +293,7 @@ public class CreateNCRecordPage extends TestBase{
 	}
 	public void DefectCategoryTextBox() throws InterruptedException {
 		
+		Assert.assertTrue(DefectCategory.isDisplayed(), "Defect Category is not displayed under Conditions panel");
 		DefectCategory.sendKeys("Physical");
 		Thread.sleep(TestUtil.SLEEP_WAIT);
         driver.findElement(By.xpath("//li[@class='t-item t-state-selected']")).click();
@@ -275,6 +301,7 @@ public class CreateNCRecordPage extends TestBase{
 
 	public void DefectTextBox() throws InterruptedException  {
 		Thread.sleep(TestUtil.SLEEP_WAIT);
+		Assert.assertTrue(Defect.isDisplayed(), "Defect is not displayed under Conditions panel");
 		Defect.sendKeys("hardness");
 		Thread.sleep(TestUtil.SLEEP_WAIT);
 		driver.findElement(By.xpath("//li[@class='t-item t-state-selected']")).click();
@@ -286,6 +313,11 @@ public class CreateNCRecordPage extends TestBase{
 
 	public void StmtOfNCTextArea() {
 		StmtOfNC.sendKeys("Testing");
+	}
+	
+	public void checkDefectID()
+	{
+		Assert.assertTrue(DefectID.isDisplayed(), "Defect ID is not displayed under Conditions Panel");
 	}
 	public void closeAlertPopUp()
 	{
@@ -463,8 +495,24 @@ public class CreateNCRecordPage extends TestBase{
 		System.out.println("Header of Material Section: "+text);
 		Assert.assertTrue(Material2.isDisplayed(),"Material is not displayed under Material section");
 		Assert.assertTrue(DesignGroup.isDisplayed(), "Design group is not displayed under Material section");
-		
-		
+			
+	}
+	
+	public void ValidateDatesSection()
+	{
+		Assert.assertEquals(ReportDate.getAttribute("type"), "text");
+		Assert.assertEquals(ReportedBy.getAttribute("type"), "text");
+		Assert.assertEquals(OccurrenceDate.getAttribute("type"), "text");
+	}
+	
+	public void AttachmentSection()
+	{
+		System.out.println("Attachment Panel is: "+AttachmentPanel.getText());
+		System.out.println("Column1 Name: "+AttachmentColumn1.getText());
+		System.out.println("Column2 Name: "+AttachmentColumn2.getText());
+		System.out.println("Column3 Name: "+AttachmentColumn3.getText());
+		System.out.println("Column4 Name: "+AttachmentColumn4.getText());
+		System.out.println("Add Attchment button: "+AddAttachment.getText());
 	}
 	
 	public void SubmitButton() {

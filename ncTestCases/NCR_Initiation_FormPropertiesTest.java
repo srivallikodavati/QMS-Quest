@@ -181,6 +181,8 @@ public class NCR_Initiation_FormPropertiesTest extends TestBase{
 		System.out.println("Operation Number input type is: "+createNCRecord.OperationNumberTextBox());
 		System.out.println("WorkCenter input type is: "+createNCRecord.WorkCenterTextBox());
 		createNCRecord.ValidateMaterialSection();
+		createNCRecord.ValidateDatesSection();
+		createNCRecord.AttachmentSection();
 		createNCRecord.clickOnSourceGeneral();
 		Thread.sleep(TestUtil.SLEEP_WAIT);
 		createNCRecord.SubmitButton();
