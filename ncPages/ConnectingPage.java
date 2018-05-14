@@ -109,10 +109,10 @@ package ncPages;
 	    	ExecuteDisposition.click();
 	    	return new ExecuteDispositionPage();
 	    }
-		public SignOffActionPlan ClickSignOffActionPlans()
+		public SignOffActionPlanPage ClickSignOffActionPlans()
 		{
 			SignOffActionPlans.click();
-			return new SignOffActionPlan();
+			return new SignOffActionPlanPage();
 		}
 		
 		public void ClickApproveDeviation()

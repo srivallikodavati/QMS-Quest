@@ -1,6 +1,10 @@
 package ncPages;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -69,12 +73,29 @@ TestUtil testUtil;
 	
 	public void setResult() throws InterruptedException
 	{
-		Result.click();
-		//driver.switchTo().frame("RadTextEditor_contentIframe");
-		Thread.sleep(10000);
-		testUtil.ChildWindowHandle();
-		//driver.switchTo().alert().sendKeys("text");
-		driver.findElement(By.xpath("//table[@id='RadTextEditorWrapper']/tbody/tr[3]/td")).sendKeys("testing");
+	    //Result.click();
+		driver.findElement(By.xpath("//*[@id='ctrlContainer_V_SS_NC-V_ASG_SIGNATURE_ACTIVITY_ASG_COMMENT_1']/span")).click();
+		Thread.sleep(testUtil.SLEEP_WAIT);
+		Thread.sleep(testUtil.SLEEP_WAIT);
+		Thread.sleep(testUtil.SLEEP_WAIT);
+		Thread.sleep(testUtil.SLEEP_WAIT);
+		//testUtil.CustomWait(120, "//*[text()='Save And Close']");
+		Set<String> handles=driver.getWindowHandles();
+		 Iterator<String> it=handles.iterator();
+		 while(it.hasNext())
+			 
+		 {
+			 driver.switchTo().window(it.next());
+		 }
+		 driver.switchTo().frame("supportRadWindowTextEditor");
+		 Thread.sleep(testUtil.SLEEP_WAIT);
+		 System.out.println("Entered into pop up");
+		 
+		WebElement ele=driver.findElement(By.xpath("//html/body//*[@id='RadTextEditor_contentIframe']"));
+		 JavascriptExecutor myExecutor = ((JavascriptExecutor) driver);
+		 myExecutor.executeScript("arguments[0].value='test';", ele);
+		// driver.findElement(By.xpath("//html/body//*[@id='RadTextEditor_contentIframe']")).click();
+		 //driver.findElement(By.xpath("//html/body//*[@id='RadTextEditor_contentIframe']")).sendKeys("testing");
 	    driver.findElement(By.xpath("//span[text()='Save And Close']")).click();	
 	}
 	

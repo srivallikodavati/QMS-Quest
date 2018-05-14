@@ -2,6 +2,7 @@ package ncTestCases;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -55,6 +56,7 @@ public class ContainmentActionTest extends TestBase{
 		testUtil.CustomWait(120, "//a[contains(text(),'Create Nonconformance')]");
 		ncHomePage.ClickFindNC();
 		testUtil.SwitchToFrame(0);
+		Thread.sleep(TestUtil.SLEEP_WAIT);
 		Thread.sleep(TestUtil.SLEEP_WAIT);
 		testUtil.CustomWait(60,"//table[@id='ctl04_resultGrid_ctl00']/tbody/tr/td/div/span/a");
 		int row_count=driver.findElements(By.xpath("//table[@id='ctl04_resultGrid_ctl00']/tbody/tr/td/div/span/a")).size();
@@ -115,7 +117,11 @@ public class ContainmentActionTest extends TestBase{
 	}
 	
 	@AfterMethod
-	public void Close() {
+	public void Close(ITestResult result) {
+		if(ITestResult.FAILURE==result.getStatus())
+		{
+			testUtil.TakeScreenshot(result.getName());
+		}
 		driver.quit();
 	}
 	

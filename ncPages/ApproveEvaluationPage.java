@@ -8,7 +8,6 @@ import baseclass.TestBase;
 
 public class ApproveEvaluationPage extends TestBase{
 	
-	VerifyNCInitiationPage verifyInitiationPage;
 	
 	@FindBy(xpath="//div[@id='ctrlContainer_V_SS_NC-V_SS_NC_POLICY_INVEST_DUE_DATE_1']")
 	WebElement EvaluationDueDate;
@@ -22,6 +21,9 @@ public class ApproveEvaluationPage extends TestBase{
 	@FindBy(id="textArea_V_ENU_NONPERSIS_USER_DATA_ENU_COMMENT_1")
 	WebElement Comment;
 	
+	@FindBy(xpath="//span[text()='Sign-off']")
+	WebElement Signoff;
+	
 	public ApproveEvaluationPage()
 	{
 		PageFactory.initElements(driver, this);
@@ -34,13 +36,13 @@ public class ApproveEvaluationPage extends TestBase{
 	public void approveEval()
 	{
 		Approve.click();
-		verifyInitiationPage.ClickOnSignOff();
+		Signoff.click();
 	}
 	public void rejectEval()
 	{
 		Reject.click();
 		Comment.sendKeys("testing");
-		verifyInitiationPage.ClickOnSignOff();
+		Signoff.click();
 	}
 	
 
